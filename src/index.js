@@ -1,32 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SeasonDisplay from './SeasonDisplay';
+
 
 class App extends React.Component { // subb classing React.Component. borriwing functionality into our class
-    constructor(props) {
-        super(props); // call to the parent's constructor function
-                      // Only time we do direct assignment to this.state
-        this.state = { lat: null, errorMessage: '' };
+    state = { lat:null, errorMessage: '' };
+    
+    // same as below for initialising state since using component did mount, because babel will transpile it w/constructor
+    
+    // constructor(props) {
+    //     super(props); // call to the parent's constructor function
+    //     // Only time we do direct assignment to this.state
+    //     this.state = { lat: null, errorMessage: '' };
+    // }
 
+    // Data loading code!
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.setState({ lat: position.coords.latitude });
-            },
-            (err) => {
-                this.setState({ errorMessage: err.message });
-            }
+            (position) => this.setState({ lat: position.coords.latitude }),
+            (err) => this.setState({ errorMessage: err.message })
         );
     }
-    
+
     render() {
-        // Conditional rendering
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>
         }
 
         if (!this.state.errorMessage && this.state.lat) {
-            return <div>Latitude: {this.state.lat}</div>
+            return <SeasonDisplay lat={this.state.lat} />
         }
-        
+
         return <div>Loading...</div>
     }
 }
