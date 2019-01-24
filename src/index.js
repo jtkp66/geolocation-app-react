@@ -4,10 +4,10 @@ import SeasonDisplay from './SeasonDisplay';
 
 
 class App extends React.Component { // subb classing React.Component. borriwing functionality into our class
-    state = { lat:null, errorMessage: '' };
-    
+    state = { lat: null, errorMessage: '' };
+
     // same as below for initialising state since using component did mount, because babel will transpile it w/constructor
-    
+
     // constructor(props) {
     //     super(props); // call to the parent's constructor function
     //     // Only time we do direct assignment to this.state
