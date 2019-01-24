@@ -22,7 +22,7 @@ class App extends React.Component { // subb classing React.Component. borriwing 
         );
     }
 
-    render() {
+    renderContent() {
         if (this.state.errorMessage && !this.state.lat) {
             return <div>Error: {this.state.errorMessage}</div>
         }
@@ -32,6 +32,14 @@ class App extends React.Component { // subb classing React.Component. borriwing 
         }
 
         return <Spinner message="Please accept location request" />
+    }
+
+    render() {
+        return (
+            <div className="border red">
+                {this.renderContent()}
+            </div>
+        )
     }
 }
 
